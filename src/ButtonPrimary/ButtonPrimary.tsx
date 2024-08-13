@@ -1,29 +1,23 @@
 import React from 'react';
 
-// Define los tipos para los valores válidos de color y tamaño
+// Define los tipos para los valores válidos de tamaño, color de fondo y color de texto
 type Size = 'xsm' | 'sm' | 'md' | 'lg' | 'xlg';
-type BgColor = 
-  | 'wewak-50' | 'wewak-100' | 'wewak-200' | 'wewak-300' | 'wewak-400' | 'wewak-500'
-  | 'wewak-600' | 'wewak-700' | 'wewak-800' | 'wewak-900' | 'wewak-950'
-  | 'biloba-flower-50' | 'biloba-flower-100' | 'biloba-flower-200' | 'biloba-flower-300'
-  | 'biloba-flower-400' | 'biloba-flower-500' | 'biloba-flower-600' | 'biloba-flower-700'
-  | 'biloba-flower-800' | 'biloba-flower-900' | 'biloba-flower-950'
-  | 'perano-50' | 'perano-100' | 'perano-200' | 'perano-300' | 'perano-400' | 'perano-500'
-  | 'perano-600' | 'perano-700' | 'perano-800' | 'perano-900' | 'perano-950'
-  | 'water-leaf-50' | 'water-leaf-100' | 'water-leaf-200' | 'water-leaf-300' | 'water-leaf-400'
-  | 'water-leaf-500' | 'water-leaf-600' | 'water-leaf-700' | 'water-leaf-800' | 'water-leaf-900'
-  | 'water-leaf-950'
-  | 'granny-smith-apple-50' | 'granny-smith-apple-100' | 'granny-smith-apple-200' 
-  | 'granny-smith-apple-300' | 'granny-smith-apple-400' | 'granny-smith-apple-500'
-  | 'granny-smith-apple-600' | 'granny-smith-apple-700' | 'granny-smith-apple-800'
-  | 'granny-smith-apple-900' | 'granny-smith-apple-950'
-  | 'zombie-50' | 'zombie-100' | 'zombie-200' | 'zombie-300' | 'zombie-400'
-  | 'zombie-500' | 'zombie-600' | 'zombie-700' | 'zombie-800' | 'zombie-900' | 'zombie-950'
-  | 'sea-pink-50' | 'sea-pink-100' | 'sea-pink-200' | 'sea-pink-300' | 'sea-pink-400'
-  | 'sea-pink-500' | 'sea-pink-600' | 'sea-pink-700' | 'sea-pink-800' | 'sea-pink-900'
-  | 'sea-pink-950';
+type Rounded = 'none' | 'sm' | 'md' | 'lg' | 'full';
 
-type TextColor = BgColor | 'slate-950' | 'white';
+type BgColor = 
+  | 'primary-background' | 'primary-background-hover'
+  | 'success-50' | 'success-100' | 'success-200' | 'success-300' | 'success-400'
+  | 'success-500' | 'success-600' | 'success-700' | 'success-800' | 'success-900' | 'success-950'
+  | 'info-50' | 'info-100' | 'info-200' | 'info-300' | 'info-400' | 'info-500'
+  | 'info-600' | 'info-700' | 'info-800' | 'info-900' | 'info-950'
+  | 'destroy-50' | 'destroy-100' | 'destroy-200' | 'destroy-300' | 'destroy-400'
+  | 'destroy-500' | 'destroy-600' | 'destroy-700' | 'destroy-800' | 'destroy-900' | 'destroy-950'
+  | 'warning-50' | 'warning-100' | 'warning-200' | 'warning-300' | 'warning-400'
+  | 'warning-500' | 'warning-600' | 'warning-700' | 'warning-800' | 'warning-900' | 'warning-950'
+  | 'cranberry-50' | 'cranberry-100' | 'cranberry-200' | 'cranberry-300' | 'cranberry-400'
+  | 'cranberry-500' | 'cranberry-600' | 'cranberry-700' | 'cranberry-800' | 'cranberry-900' | 'cranberry-950';
+
+type TextColor = 'primary-text';
 
 // Define las props del componente con los tipos especificados
 interface ButtonPrimaryProps {
@@ -32,137 +26,134 @@ interface ButtonPrimaryProps {
   bgColor?: BgColor;
   textColor?: TextColor;
   width?: string;
+  rounded?: Rounded;
   className?: string;
+  hover?: string;
   [key: string]: any; // Para permitir otras props si es necesario
 }
 
 export const ButtonPrimary: React.FC<ButtonPrimaryProps> = ({
   text = '', // Texto por defecto
   size = 'md', // Tamaño por defecto
-  bgColor = 'wewak-300',  // Color de fondo por defecto
-  textColor = 'slate-950', // Color del texto por defecto
-  width = 'auto', // Ancho por defecto
+  bgColor = 'primary-background', // Color de fondo por defecto
+  textColor = 'primary-text', // Color del texto por defecto
+  width = 'fit-content', // Ancho por defecto
+  rounded = 'md', // Borde redondeado por defecto
   className = '', // Clases adicionales
+  hover = '', // Clases adicionales para hover
   ...props
 }) => {
   // Define estilos de tamaño para los botones
   const sizeClasses: Record<Size, string> = {
-    xsm: 'px-[18px] py-1 text-xs h-8', // Extra Small
-    sm: 'px-[18px] py-1.5 text-sm h-10', // Small
-    md: 'px-[18px] py-2 text-base h-12', // Medium
-    lg: 'px-[18px] py-2.5 text-lg h-14', // Large
-    xlg: 'px-[18px] py-3 text-xl h-16', // Extra Large
+    xsm: 'px-[18px] py-[4px] text-[12px] h-[32px]', // Extra Small
+    sm: 'px-[20px] py-[6px] text-[14px] h-[40px]', // Small
+    md: 'px-[22px] py-[8px] text-[16px] h-[48px]', // Medium
+    lg: 'px-[24px] py-[10px] text-[18px] h-[56px]', // Large
+    xlg: 'px-[26px] py-[12px] text-[20px] h-[64px]', // Extra Large
+  };
+
+  // Define estilos de borde redondeado
+  const roundedClasses: Record<Rounded, string> = {
+    none: 'rounded-[0px]',
+    sm: 'rounded-[2px]',
+    md: 'rounded-[6px]',
+    lg: 'rounded-[8px]',
+    full: 'rounded-[9999px]',
   };
 
   // Define las paletas de colores personalizadas para el fondo
   const bgColorClasses: Record<BgColor, string> = {
-    // Wewak
-    'wewak-50': 'bg-wewak-50',
-    'wewak-100': 'bg-wewak-100',
-    'wewak-200': 'bg-wewak-200',
-    'wewak-300': 'bg-wewak-300',
-    'wewak-400': 'bg-wewak-400',
-    'wewak-500': 'bg-wewak-500',
-    'wewak-600': 'bg-wewak-600',
-    'wewak-700': 'bg-wewak-700',
-    'wewak-800': 'bg-wewak-800',
-    'wewak-900': 'bg-wewak-900',
-    'wewak-950': 'bg-wewak-950',
-    // Biloba Flower
-    'biloba-flower-50': 'bg-biloba-flower-50',
-    'biloba-flower-100': 'bg-biloba-flower-100',
-    'biloba-flower-200': 'bg-biloba-flower-200',
-    'biloba-flower-300': 'bg-biloba-flower-300',
-    'biloba-flower-400': 'bg-biloba-flower-400',
-    'biloba-flower-500': 'bg-biloba-flower-500',
-    'biloba-flower-600': 'bg-biloba-flower-600',
-    'biloba-flower-700': 'bg-biloba-flower-700',
-    'biloba-flower-800': 'bg-biloba-flower-800',
-    'biloba-flower-900': 'bg-biloba-flower-900',
-    'biloba-flower-950': 'bg-biloba-flower-950',
-    // Perano
-    'perano-50': 'bg-perano-50',
-    'perano-100': 'bg-perano-100',
-    'perano-200': 'bg-perano-200',
-    'perano-300': 'bg-perano-300',
-    'perano-400': 'bg-perano-400',
-    'perano-500': 'bg-perano-500',
-    'perano-600': 'bg-perano-600',
-    'perano-700': 'bg-perano-700',
-    'perano-800': 'bg-perano-800',
-    'perano-900': 'bg-perano-900',
-    'perano-950': 'bg-perano-950',
-    // Water Leaf
-    'water-leaf-50': 'bg-water-leaf-50',
-    'water-leaf-100': 'bg-water-leaf-100',
-    'water-leaf-200': 'bg-water-leaf-200',
-    'water-leaf-300': 'bg-water-leaf-300',
-    'water-leaf-400': 'bg-water-leaf-400',
-    'water-leaf-500': 'bg-water-leaf-500',
-    'water-leaf-600': 'bg-water-leaf-600',
-    'water-leaf-700': 'bg-water-leaf-700',
-    'water-leaf-800': 'bg-water-leaf-800',
-    'water-leaf-900': 'bg-water-leaf-900',
-    'water-leaf-950': 'bg-water-leaf-950',
-    // Granny Smith Apple
-    'granny-smith-apple-50': 'bg-granny-smith-apple-50',
-    'granny-smith-apple-100': 'bg-granny-smith-apple-100',
-    'granny-smith-apple-200': 'bg-granny-smith-apple-200',
-    'granny-smith-apple-300': 'bg-granny-smith-apple-300',
-    'granny-smith-apple-400': 'bg-granny-smith-apple-400',
-    'granny-smith-apple-500': 'bg-granny-smith-apple-500',
-    'granny-smith-apple-600': 'bg-granny-smith-apple-600',
-    'granny-smith-apple-700': 'bg-granny-smith-apple-700',
-    'granny-smith-apple-800': 'bg-granny-smith-apple-800',
-    'granny-smith-apple-900': 'bg-granny-smith-apple-900',
-    'granny-smith-apple-950': 'bg-granny-smith-apple-950',
-    // Zombie
-    'zombie-50': 'bg-zombie-50',
-    'zombie-100': 'bg-zombie-100',
-    'zombie-200': 'bg-zombie-200',
-    'zombie-300': 'bg-zombie-300',
-    'zombie-400': 'bg-zombie-400',
-    'zombie-500': 'bg-zombie-500',
-    'zombie-600': 'bg-zombie-600',
-    'zombie-700': 'bg-zombie-700',
-    'zombie-800': 'bg-zombie-800',
-    'zombie-900': 'bg-zombie-900',
-    'zombie-950': 'bg-zombie-950',
-    // Sea Pink
-    'sea-pink-50': 'bg-sea-pink-50',
-    'sea-pink-100': 'bg-sea-pink-100',
-    'sea-pink-200': 'bg-sea-pink-200',
-    'sea-pink-300': 'bg-sea-pink-300',
-    'sea-pink-400': 'bg-sea-pink-400',
-    'sea-pink-500': 'bg-sea-pink-500',
-    'sea-pink-600': 'bg-sea-pink-600',
-    'sea-pink-700': 'bg-sea-pink-700',
-    'sea-pink-800': 'bg-sea-pink-800',
-    'sea-pink-900': 'bg-sea-pink-900',
-    'sea-pink-950': 'bg-sea-pink-950',
+    'primary-background': 'bg-primary-background',
+    'primary-background-hover': 'bg-primary-background-hover',
+    // Success
+    'success-50': 'bg-success-50',
+    'success-100': 'bg-success-100',
+    'success-200': 'bg-success-200',
+    'success-300': 'bg-success-300',
+    'success-400': 'bg-success-400',
+    'success-500': 'bg-success-500',
+    'success-600': 'bg-success-600',
+    'success-700': 'bg-success-700',
+    'success-800': 'bg-success-800',
+    'success-900': 'bg-success-900',
+    'success-950': 'bg-success-950',
+    // Info
+    'info-50': 'bg-info-50',
+    'info-100': 'bg-info-100',
+    'info-200': 'bg-info-200',
+    'info-300': 'bg-info-300',
+    'info-400': 'bg-info-400',
+    'info-500': 'bg-info-500',
+    'info-600': 'bg-info-600',
+    'info-700': 'bg-info-700',
+    'info-800': 'bg-info-800',
+    'info-900': 'bg-info-900',
+    'info-950': 'bg-info-950',
+    // Destroy
+    'destroy-50': 'bg-destroy-50',
+    'destroy-100': 'bg-destroy-100',
+    'destroy-200': 'bg-destroy-200',
+    'destroy-300': 'bg-destroy-300',
+    'destroy-400': 'bg-destroy-400',
+    'destroy-500': 'bg-destroy-500',
+    'destroy-600': 'bg-destroy-600',
+    'destroy-700': 'bg-destroy-700',
+    'destroy-800': 'bg-destroy-800',
+    'destroy-900': 'bg-destroy-900',
+    'destroy-950': 'bg-destroy-950',
+    // Warning
+    'warning-50': 'bg-warning-50',
+    'warning-100': 'bg-warning-100',
+    'warning-200': 'bg-warning-200',
+    'warning-300': 'bg-warning-300',
+    'warning-400': 'bg-warning-400',
+    'warning-500': 'bg-warning-500',
+    'warning-600': 'bg-warning-600',
+    'warning-700': 'bg-warning-700',
+    'warning-800': 'bg-warning-800',
+    'warning-900': 'bg-warning-900',
+    'warning-950': 'bg-warning-950',
+    // Cranberry
+    'cranberry-50': 'bg-cranberry-50',
+    'cranberry-100': 'bg-cranberry-100',
+    'cranberry-200': 'bg-cranberry-200',
+    'cranberry-300': 'bg-cranberry-300',
+    'cranberry-400': 'bg-cranberry-400',
+    'cranberry-500': 'bg-cranberry-500',
+    'cranberry-600': 'bg-cranberry-600',
+    'cranberry-700': 'bg-cranberry-700',
+    'cranberry-800': 'bg-cranberry-800',
+    'cranberry-900': 'bg-cranberry-900',
+    'cranberry-950': 'bg-cranberry-950',
   };
 
   // Define las paletas de colores personalizadas para el texto
   const textColorClasses: Record<TextColor, string> = {
-    ...bgColorClasses, // Usa las mismas clases de color para el texto
-    'slate-950': 'text-slate-950', // Manteniendo slate-950 como color de texto predeterminado
-    'white': 'text-white',
+    'primary-text': 'text-primary-text',
   };
 
   // Usa el tamaño por defecto 'md' si el tamaño pasado no es válido
   const sizeClass = sizeClasses[size] || sizeClasses.md;
 
   // Usa el color por defecto si el color pasado no es válido
-  const bgColorClass = bgColorClasses[bgColor] || bgColorClasses['wewak-300'];
-  const textColorClass = textColorClasses[textColor] || textColorClasses['slate-950'];
+  const bgColorClass = bgColorClasses[bgColor] || bgColorClasses['primary-background'];
+  const textColorClass = textColorClasses[textColor] || textColorClasses['primary-text'];
+  const roundedClass = roundedClasses[rounded] || roundedClasses.md;
 
   return (
     <div
-      className={`font-bold cursor-pointer rounded-md flex items-center justify-center ${sizeClass} ${bgColorClass} ${textColorClass} ${className}`}
-      style={{ width, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}
+      className={`font-bold cursor-pointer flex items-center justify-center transition-colors ${sizeClass} ${bgColorClass} ${textColorClass} ${roundedClass} ${className} ${hover}`}
+      style={{
+        width,
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+        textOverflow: 'ellipsis',
+      }}
       {...props}
     >
       {text}
     </div>
   );
 };
+
+export default ButtonPrimary;
